@@ -1,11 +1,38 @@
 package com.project.app.rest.Application.Models;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 public class Departamento {
+
+    public Departamento() {
+
+    }
+
+    public Departamento(String Nome, String Sigla){
+        this.nome = Nome;
+        this.sigla = Sigla;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public int Id;
+
+    @NotEmpty(message = "O campo não pode ser nulo")
+    @javax.validation.constraints.NotNull(message = "O campo não pode ser nulo")
+    private String nome;
+
+    @NotEmpty(message = "O campo não pode ser nulo")
+    @NotNull(message = "O campo não pode ser nulo")
+    private String sigla;
+
 
     public int getId() {
         return Id;
@@ -31,16 +58,6 @@ public class Departamento {
         this.sigla = sigla;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public int Id;
-
-
-    private String nome;
-
-
-    private String sigla;
-
     @OneToMany(
             mappedBy = "departamento",
             cascade = CascadeType.ALL,
@@ -49,18 +66,7 @@ public class Departamento {
 
     private List<Funcionario> funcionarios = new ArrayList<>();
 
-    public Departamento(String Nome, String Sigla){
-        this.nome = Nome;
-        this.sigla = Sigla;
-    }
-
     public void setFuncionarios(List<Funcionario> funcs){
         this.funcionarios = funcs;
     }
-
-    public Departamento() {
-
-    }
-
-
 }
