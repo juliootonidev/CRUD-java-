@@ -20,24 +20,24 @@ public class DepartamentoController {
 //            return "Hello world!";
 //    }
 
-    @GetMapping(value = "/depart")
+    @GetMapping(value = "/list/depart")
     public List<Departamento> getDepartamentorepo() {
         return departamentoRepository.findAll();
     }
 
-    @PostMapping(value = "/depart")
+    @PostMapping(value = "/post/depart")
     public String saveDepart(@RequestBody @Valid Departamento departamento) {
         departamentoRepository.save(departamento);
         return "Saved";
     }
 
-    @PutMapping("/atualizar/{id}")
+    @PutMapping("/att/depart/{id}")
     public Departamento atualizar(@RequestBody @Valid Departamento departamento, @PathVariable int id) {
         departamento.setId(id);
         return departamentoRepository.save(departamento);
     }
 
-    @DeleteMapping("/depart/{id}")
+    @DeleteMapping("/delete/depart/{id}")
     public String deleteDpt(@PathVariable("id") int id) {
 
         departamentoRepository.deleteById(id);

@@ -25,12 +25,12 @@ public class FuncionarioController {
         this.departamentoRepository = departamentoRepository;
     }
 
-    @GetMapping(value = "/func")
+    @GetMapping(value = "/list/func")
     public List<Funcionario> getFunc() {
         return funcionarioRepository.findAll();
     }
 
-    @PostMapping(value = "/func")
+    @PostMapping(value = "/post/func")
     public String saveDepart(@RequestBody @Valid FuncionarioDTO func) {
 
         var dept = departamentoRepository.findById(func.id_departamento).orElse(null);
@@ -49,7 +49,7 @@ public class FuncionarioController {
         }
     }
 
-    @PutMapping("/func/{id}")
+    @PutMapping("/att/func/{id}")
     public Funcionario atualizarFunc(@RequestBody @Valid FuncionarioDTO func, @PathVariable int id) {
 
         var funcs = funcionarioRepository.findById(id);
@@ -64,7 +64,7 @@ public class FuncionarioController {
         return funcs;
     }
 
-    @DeleteMapping("/delete-func/{id}")
+    @DeleteMapping("/delete/func{id}")
     public String deleteFunc(@PathVariable("id") int id) {
 
         funcionarioRepository.deleteById(id);
